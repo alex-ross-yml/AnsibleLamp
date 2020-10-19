@@ -1,0 +1,44 @@
+#AlexLamp.yml-1/9/2020
+---
+- hosts: www
+  user: root
+ 
+  tasks:
+
+  - name: epel installation
+    yum: pkg=epel-release state=installed
+  
+  - name: httpd install
+    yum: pkg=httpd state=installed
+
+  - name: php install
+    yum: pkg=php state=installed
+
+  - name: copy php info file
+    shell: echo "<?php phpinfo (); ?>" > /var/www/html/info.php
+
+  - name: mariadb installed
+    yum: name={{ item }} state=installed
+    with_items:
+    - mariadb-server
+    - mariadb
+
+  - firewalld:
+      service: http
+      permanent: true
+      state: enabled
+
+  - name: restartmariadb
+    service: 
+      name: mariadb
+      state: restarted
+  
+  - name: firewall restart
+    service:
+      name: firewalld
+      state: reloaded
+
+  - name: httpd restart
+    service:
+      name: httpd
+      state: restarted
