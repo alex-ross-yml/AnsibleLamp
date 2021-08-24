@@ -1,2 +1,2 @@
 
-# Simple Lamp Stack for CentOS (create your own host file)
+# Simple Lamp Stack for CentOS (hosts on local IP)
