@@ -1,6 +1,6 @@
 #AlexLamp.yml-1/9/2020
 ---
-- hosts: www
+- hosts: localhost
   user: root
  
   tasks:
